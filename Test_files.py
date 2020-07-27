@@ -61,8 +61,8 @@ def test_generator1():
     TEST_NUMBER_CASES = 100
     PATTERN_LENGTH = 100
     
-    for x in range(TEST_NUMBER_CASES):
-        pattern = chr(ord('z')+(x%26))*(x%PATTERN_LENGTH)
+    for i in range(TEST_NUMBER_CASES):
+        pattern = chr(ord('z')+(i%26))*(i%PATTERN_LENGTH)
         if (len(pattern) == 0):
             continue
         
