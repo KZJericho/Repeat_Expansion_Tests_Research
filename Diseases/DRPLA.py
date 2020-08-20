@@ -79,14 +79,17 @@ def DRPLA_Test(txt):
     #determine diseaase positive/negative    
     if best_length < 1:
         return None
-    elif best_length <= 35:
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result"
+    elif best_length < 20:
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
         
-    elif best_length in range(36,49):
+    elif best_length in range(20,36):
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Mutable Normal Allele"
+        
+    elif best_length in range(35,49):
         return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Undetermined Result"
         
     elif best_length > 48:
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result"
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Full-Penetrance Allele"
         
 
         

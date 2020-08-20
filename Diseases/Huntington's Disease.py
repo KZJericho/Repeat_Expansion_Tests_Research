@@ -77,14 +77,17 @@ def Huntington_Test(txt):
         current_best_location = current_location - (len(pat))*((current_length)-1)
         
     #determine diseaase positive/negative    
-    if best_length <= 35:
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result"
+    if best_length <= 26:
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
+        
+    elif best_length in range (27,36):
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Intermediate Allele"
         
     elif best_length in range(36,40):
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Undetermined Result"
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Reduced-Penetrance Allele"
         
     elif best_length >= 40:
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result"
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Full-Penetrance Allele"
         
 
 

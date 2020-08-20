@@ -80,13 +80,16 @@ def SBMA_Test(txt):
     if best_length < 1:
         return None
     elif best_length <= 34:
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result"
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
         
-    elif best_length in range (35,38):
+    elif best_length == 35:
         return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Undetermined Result"
-        
+    
+    elif best_length in range(36,38):
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Reduced-Penetrance Allele"
+    
     elif best_length > 37:
-        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result"
+        return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Full-Penetrance Allele"
         
 
 
