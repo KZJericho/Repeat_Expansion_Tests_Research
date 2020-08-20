@@ -5,7 +5,8 @@ def my_mod(dividend, divisor):
     else:
         return mod
     
-def Huntington_Test(txt, pat):
+def Huntington_Test(txt):
+    pat = "CAG"
     print("Testing for Huntington's Disease", end = "")
     assert(len(pat) <= len(txt))
     

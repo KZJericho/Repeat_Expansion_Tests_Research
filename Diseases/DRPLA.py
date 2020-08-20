@@ -5,7 +5,8 @@ def my_mod(dividend, divisor):
     else:
         return mod
     
-def DRPLA_Test(txt, pat):
+def DRPLA_Test(txt):
+    pat = "CAG"
     print("Testing for DRPLA...", end = "")
     assert(len(pat) <= len(txt))
     

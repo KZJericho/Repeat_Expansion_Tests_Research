@@ -5,7 +5,8 @@ def my_mod(dividend, divisor):
     else:
         return mod
     
-def SBMA_Test(txt, pat):
+def SBMA_Test(txt):
+    pat = "CAG"
     print("Testing for SBMA...", end = "")
     assert(len(pat) <= len(txt))
     
