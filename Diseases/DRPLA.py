@@ -7,6 +7,7 @@ def my_mod(dividend, divisor):
     
 def DRPLA_Test(txt, pat):
     print("Testing for DRPLA...", end = "")
+    assert(len(pat) <= len(txt))
     
     pattern_length = len(pat)
     text_length = len(txt)
@@ -58,7 +59,7 @@ def DRPLA_Test(txt, pat):
             number_of_letters_rolling_over = 1 
         
         #re-hash
-        if i + number_of_letters_rolling_over < text_length - pattern_length:
+        if i + number_of_letters_rolling_over <= text_length - pattern_length:
             for j in range(number_of_letters_rolling_over):
                 current_txt_hash = my_mod((base*(current_txt_hash-ord(txt[i])*exponent) + ord(txt[i+pattern_length])),prime)
                 i += 1
@@ -86,7 +87,7 @@ def DRPLA_Test(txt, pat):
     elif best_length > 48:
         return "CAG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result"
         
-print(DRPLA_Test("CAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAGCAG", "CAG"))
+
         
 
     

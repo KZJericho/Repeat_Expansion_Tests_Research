@@ -58,7 +58,7 @@ def find_best_pattern(txt, pat):
             number_of_letters_rolling_over = 1 
         
         #re-hash
-        if i + number_of_letters_rolling_over < text_length - pattern_length:
+        if i + number_of_letters_rolling_over <= text_length - pattern_length:
             for j in range(number_of_letters_rolling_over):
                 current_txt_hash = my_mod((base*(current_txt_hash-ord(txt[i])*exponent) + ord(txt[i+pattern_length])),prime)
                 i += 1
@@ -77,6 +77,8 @@ def find_best_pattern(txt, pat):
 
     
     return (best_length, current_best_location)
+
+print(find_best_pattern("CAG", "CAG"))
 
 def open_genome_file_as_string(filename): 
     file = open(filename, 'r')
