@@ -34,7 +34,6 @@ class Disease(object):
     # txt is the text representing our genome
     # pats is a list of the patterns to look for
     def group_patterns_test(self, path = None, text = None):
-        print("boo")
         if path != None: 
             txt = read_file(path).replace("\n", "") # Assume a well formatted gene
         else: 
@@ -136,9 +135,9 @@ class Disease(object):
     
     def process_results(self, best_length, current_best_location, path):
         # Interpret location data with length, and use threshholds to determine disease status
-        if best_length < self.thresholds[0]:
+        if best_length <= self.thresholds[0]:
             result = "Negative", best_length
-        elif self.thresholds[0] <= best_length < self.thresholds[1]:
+        elif self.thresholds[0] < best_length < self.thresholds[1]:
             result = "Indeterminate", best_length
         else:
             result = "Positive", best_length
@@ -181,12 +180,158 @@ def all_sequences_test(Diseases, path = None, txt = None):
 
 if __name__ == "__main__":
     Disease_list = []
-    HD = Disease("HD", "4", "HTT", ["CAG"], (27,36))
+    
+    DRPLA = Disease("DRPLA", "12", "ATN1", ["CAG"], (34,48))
+    Disease_list.append(DRPLA)
+    
+    HD = Disease("HD", "4", "HTT", ["CAG"], (26,36))
     Disease_list.append(HD)
+    
+    SBMA = Disease("SBMA", "X", "AR", ["CAG"], (34,38))
+    Disease_list.append(SBMA)
+    
+    #SCA1
+    
+    SCA2 = Disease("SCA2", "12", "ATXN2", ["CAG"], (30,33))
+    Disease_list.append(SCA2)
+    
+    SCA3 = Disease("SCA3", "14", "ATXN3", ["CAG"], (44,53))
+    Disease_list.append(SCA3)
+    
+    SCA6 = Disease("SCA6", "19", "CACNA1A", ["CAG"], (18,20))
+    Disease_list.append(SCA6)
+    
+    SCA7 = Disease("SCA7", "3", "ATXN7", ["CAG"], (27,34))
+    Disease_list.append(SCA7)
+    
+    SCA17 = Disease("SCA17", "6", "TBP", ["CAG", "CAA"], (40,41))
+    Disease_list.append(SCA17)
+    
+    FXS = Disease("FXS", "X", "FMR1", ["CGG", "AGG"], (199,200))
+    Disease_list.append(FXS)
+    
+    #how to make an upper boundary of 200 for fxpoi and fxtas? add an if else statement in code for if fxs positive, fxpoi and fxtas are negative?
+    FXPOI = Disease("FXPOI", "X", "FMR1", ["CGG", "AGG"], (44,55))
+    Disease_list.append(FXPOI)
+    
+    FXTAS = Disease("FXTAS", "X", "FMR1", ["CGG", "AGG"], (44,55))
+    Disease_list.append(FXTAS)
+    
+    #should there be a 3rd boundary for 55-200
+    FRAXE = Disease("FRAXE", "X", "AFF2", ["CCG"], (40,200))
+    Disease_list.append(FRAXE)
+    
+    FRAXF = Disease("FRAXF", "X", "FAM11A", ["GCC"], (26,300))
+    Disease_list.append(FRAXF)
+    
+    FRA2A = Disease("FRA2A", "2", "AFF3", ["CGG"], (20,300))
+    Disease_list.append(FRA2A)
+    
+    FRA7A = Disease("FRA7A", "7", "ZNF713", ["CGG"], (22,68))
+    Disease_list.append(FRA7A)
+    
+    FRA10A = Disease("FRA10A", "10", "FRA19AC1", ["CGG"], (14,200))
+    Disease_list.append(FRA10A)
+    
+    #FRA11B
+    
+    FRA12A = Disease("FRA12A", "12", "DIP2B", ["CGG"], (23,270))
+    Disease_list.append(FRA12A)
+    
+    FRA16A = Disease("FRA16A", "16", "FRA16A", ["CCG"], (49,300))
+    Disease_list.append(FRA16A)
+    
+    NIID = Disease("NIID", "X", "FMR1", ["CGG"], (44,55))
+    Disease_list.append(NIID)
+    
+    FRDA = Disease("FRDA", "9", "FXN", ["GAA"], (33,66))
+    Disease_list.append(FRDA)
+    
+    BSS = Disease("BSS", "16", "XYLT1", ["GCC"], (35,200))
+    
+    DM1 = Disease("DM1", "19", "DMPK", ["CTG"], (34,50))
+    Disease_list.append(DM1)
+    
+    CDM1 = Disease("CDM1", "19", "DMPK", ["CTG"],(999,1000))
+    Disease_list.append(DM1)
+    
+    #SCA8
+    
+    SCA12 = Disease("SCA12", "5", "PPP2R2B", ["CAG"], (40,43))
+    Disease_list.append(SCA12)
+    
+    OPMD = Disease("OPMD", "14", "PABPN1", ["GCA", "GCG", "GCT", "GCC"], (10,11))
+    Disease_list.append(OPMD)
+    
+    HDL2 = Disease("HDL2", "16", "JPH3", ["CTG"], (28,40))
+    Disease_list.append(HDL2)
+    
+    FECD = Disease("FECD", "18", "TCF4", ["CTG"], (69,120))
+    Disease_list.append(FECD)
+    
+    GAD = Disease("GAD", "2", "GLS", ["GCA"], (89,90))
+    Disease_list.append(GAD)
+    
+    PSACH = Disease("GAC", "19", "COMP", ["GAC"], (5,6))
+    Disease_list.append(PSACH)
+    
+    MED = Disease("GAC", "19", "COMP", ["GAC"], (5,6))
+    Disease_list.append(MED)
+    
+    BPES = Disease("BPES", "14", "FOXL2", ["GCA", "GCG", "GCT", "GCC"], (14,15))
+    Disease_list.append(BPES)
+    
+    CCD = Disease("CCD", "6", "RUNX2", ["GCA", "GCG", "GCT", "GCC"], (14,27))
+    Disease_list.append(CCD)
+    
+    CCHS = Disease("CCHS", "4", "PHOX2B", ["GCA", "GCG", "GCT", "GCC"], (23,26))
+    Disease_list.append(CCHS)
+    
+    #HFGS
+    #COMPLICATED, LOOK MORE INTO
+    
+    HPE5 = Disease("HPE5", "13", "ZIC2", ["GCA", "GCG", "GCT", "GCC"], (24,25))
+    Disease_list.append(HPE5)
+    #MORE INFO ON BOUNDARIES
+    
+    SPD = Disease("SPD", "2", "HOXD13", ["GCA", "GCG", "GCT", "GCC"], (15,22))
+    Disease_list.append(SPD)
+    
+    #MRGH
+    
+    #XLMD
+    
+    #XLAG
+    
+    #XLMR
+    
+    #XLMRGHD
+    
+    #EIEE
+    
+    #DM2
+    
+    #BAFME
+    
     SCA10 = Disease("SCA10", "22", "ATXN10", ["ATTCT"], (33,850))
     Disease_list.append(SCA10)
-    DRPLA = Disease("DRPLA", "12", "ATN1", ["CAG"], (35,48))
-    Disease_list.append(DRPLA)
+    
+    SCA31 = Disease("SCA31", "16", "BEAN1", ["TGGAA"], (2499, 3800))
+    Disease_list.append(SCA31)
+    
+    SCA36 = Disease("SCA36", "20", "NOP56", ["GGCCTG"], (14,650))
+    Disease_list.append(SCA36)
+    
+    XDP = Disease("XDP", "X", "TAF1", ["CCCTCT"], (34,35))
+    #MORE INFO ON BOUNDARIES
+    
+    C9ORF72 = Disease("C9ORF72", "9", "C9PORF72", ["GGGGCC"], (24,60))
+    Disease_list.append(C9ORF72)
+    
+    EPM1 = Disease("EPM1", "21", "CSTB", ["CCCCGCCCCGCG"], (3, 30))
+    Disease_list.append(EPM1)
+
+    
     
     
     all_sequences_test(Disease_list, "C:\\Users\\KZJer\\Documents\\Repeat_Expansion_Tests_Research\\Genomes\\DRPLA_NEG_D63808.1.txt")

@@ -4,17 +4,21 @@ def my_mod(dividend, divisor):
         return mod + divisor
     else:
         return mod
+
+# txt is the text representing our genome
+# pats is a list of the patterns to look for
+def SPD_Test(txt):
+    pats = ["GCA", "GCC", "GCG", "GCT"]
+    results = None 
+    print("Testing for SPD..., end = "")
     
-def DM1_CDM1_Test(txt):
-    pat = "CTG"
-    print("Testing for DM1 and CDM1...", end = "")
-    assert(len(pat) <= len(txt))
+    for pat in pats:
+        assert(len(pat) <= len(txt))
     
-    pattern_length = len(pat)
+    pattern_length = len(pats[0])
     text_length = len(txt)
     prime = 2971215073
     
-    pattern_hash = 0
     current_txt_hash = 0
 
     best_length = 0
@@ -33,28 +37,38 @@ def DM1_CDM1_Test(txt):
     #calculate exponent
     for i in range(pattern_length - 1):
         exponent = (base**(pattern_length-1))%prime
+    
+    # Create a dictionary of patterns mapped to their hashes
+    pats_dictionary = {}
+    for pat in pats:
+        pattern_hash = 0
+        for i in range(pattern_length):
+            pattern_hash = (base*pattern_hash + ord(pat[i]))%prime
+        pats_dictionary[pat] = pattern_hash
         
     #calculate first hash and pattern hash    
     for i in range(pattern_length):
-        pattern_hash = (base*pattern_hash + ord(pat[i]))%prime
         current_txt_hash = my_mod((base*current_txt_hash + ord(txt[i])),prime)
 
     i = 0
     #rolling hash
     while i < (len(txt)):
         number_of_letters_rolling_over = 0 
-        current_chunk = txt[i:i+pattern_length] 
-        if current_txt_hash == pattern_hash and current_chunk == pat:
+        current_chunk = txt[i:i+pattern_length]
+        for pat in pats:
+            pattern_hash = pats_dictionary[pat]
+            if current_txt_hash == pattern_hash and current_chunk == pat:
                 current_length += 1  
                 current_location = i 
 
-                number_of_letters_rolling_over = len(pat)
+                number_of_letters_rolling_over = pattern_length
+                break
         
         #record best lengths
         else:
             if current_length > best_length:
                 best_length = current_length
-                current_best_location = current_location - (len(pat))*((current_length)-1)
+                current_best_location = current_location - (pattern_length)*((current_length)-1)
 
             current_length = 0
             number_of_letters_rolling_over = 1 
@@ -79,19 +93,16 @@ def DM1_CDM1_Test(txt):
     #determine diseaase positive/negative    
     if best_length < 1:
         return None
-    elif best_length <= 34:
-        return "CTG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
+    elif best_length <= 15:
+        return "GCN Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
         
-    elif best_length in range (35, 50):
-        return "CTG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Mutable Normal Allele"
+    elif best_length in range (16,22):
+        return "GCN Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Mutable Normal Allele"
         
-    elif best_length in range (50,1000):
-        return "CTG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele for DM1"
+    elif best_length >= 22:
+        return "GCN Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele"
         
-    elif best_length >= 1000:
-        return "CTG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele for CDM1"
-        
-        
+
 
 
 
