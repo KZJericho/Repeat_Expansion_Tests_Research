@@ -7,16 +7,14 @@ def my_mod(dividend, divisor):
 
 # txt is the text representing our genome
 # pats is a list of the patterns to look for
-def HFGS_Test(txt):
+def PRTS_Test(txt):
     pats = ["GCA", "GCC", "GCG", "GCT"]
     results = None 
-    print("Testing for HFGS...", end = "")
+    print("Testing for PRTS...", end = "")
     
     for pat in pats:
         assert(len(pat) <= len(txt))
     
-    second_length = ""
-    third_length = ""
     pattern_length = len(pats[0])
     text_length = len(txt)
     prime = 2971215073
@@ -25,8 +23,6 @@ def HFGS_Test(txt):
 
     best_length = 0
     current_best_location = None
-    second_location = None
-    third_location = None
     
     current_length = 0
     current_location = None
@@ -71,10 +67,6 @@ def HFGS_Test(txt):
         #record best lengths
         else:
             if current_length > best_length:
-                third_length = second_length
-                third_location = second_location
-                second_length = best_length
-                second_location = current_best_location
                 best_length = current_length
                 current_best_location = current_location - (pattern_length)*((current_length)-1)
 
@@ -95,36 +87,21 @@ def HFGS_Test(txt):
 
     #record best lengths last time
     if current_length > best_length:
-        third_length = second_length
-        third_location = second_location
-        second_length = best_length
-        second_location = current_best_location
         best_length = current_length
         current_best_location = current_location - (len(pat))*((current_length)-1)
         
     #determine diseaase positive/negative    
     if best_length < 1:
         return None
-    elif best_length == 18 and second_length == 14 and third_length = 12:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", third_length, "Location 3: Index", third_location, "Negative Result: Normal Allele"
+    elif best_length <= 16:
+        return "GCN Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
         
-    elif best_length == 14 and second_length == 12 and third_length = 12:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", third_length, "Location 3: Index", third_location, "Negative Result: Normal Allele"
+    elif best_length in range(17,20):
+        return "GCN Repeat Length:", best_length, "Location: Index", current_best_location, "Undetermined Result: Intermediate Allele"
         
-    elif best_length == 14 and second_length == 12 and third_length = 8:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", third_length, "Location 3: Index", third_location, "Negative Result: Normal Allele"
+    elif best_length >= 20:
+        return "GCN Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele"
         
-    elif best_length == 22:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", third_length, "Location 3: Index", third_location, "Positive Result: Pathogenic Allele"
-        
-    elif best_length >= 18 and second_length >= 18:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", third_length, "Location 3: Index", third_location, "Positive Result: Pathogenic Allele"
-        
-    elif best_length > 19:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", third_length, "Location 3: Index", third_location, "Positive Result: Pathogenic Allele"
-        
-    else:
-        return "GCN Repeat Length 1:", best_length, "Location 1: Index", current_best_location, "GCN Repeat Length 2:", second_length, "Location 2: Index", second_location, "GCN Repeat Length 3:", t'hird_length, "Location 3: Index", third_location, "Undetermined Result"
 
 
 

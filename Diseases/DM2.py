@@ -7,10 +7,10 @@ def my_mod(dividend, divisor):
 
 # txt is the text representing our genome
 # pats is a list of the patterns to look for
-def SCA1_Test(txt):
-    pats = ["CAG"]
+def DM2_Test(txt):
+    pats = ["CCTG"]
     results = None 
-    print("Testing for SCA1 without interruption...", end = "")
+    print("Testing for DM2 without interruption...", end = "")
     
     for pat in pats:
         assert(len(pat) <= len(txt))
@@ -93,18 +93,18 @@ def SCA1_Test(txt):
     #determine diseaase positive/negative    
     if best_length < 1:
         return None
-    elif best_length <= 35:
-        print("GAC Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele")
+    elif best_length < 30:
+        print("CCTG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele")
         
-    elif best_length in range (36,39):
-        print ("GAC Repeat Length:", best_length, "Location: Index", current_best_location, "Undetermined Result: Intermediate Allele")
+    elif best_length in range (30,75):
+        print ("CCTG Repeat Length:", best_length, "Location: Index", current_best_location, "Undetermined Result: Intermediate Allele")
         
-    elif best_length >= 39:
-        print ("GAC Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele")
+    elif best_length >= 75:
+        print ("CCTG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele")
         
-    pats = ["CAG", "CAT"]
+    pats = ["CCTG", "GCTC", "TCTG"]
     results = None 
-    print("Testing for SCA1 with interruption...", end = "")
+    print("Testing for DM2 with interruption...", end = "")
     
     for pat in pats:
         assert(len(pat) <= len(txt))
@@ -187,14 +187,14 @@ def SCA1_Test(txt):
     #determine diseaase positive/negative    
     if best_length < 1:
         return None
-    elif best_length <= 44:
-        return "GAC/CAT Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
+    elif best_length <= 26:
+        return "CCTG/GCTC/TCTG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
         
-    elif best_length == 45:
-        return "GAC/CAT Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
+    elif best_length in range(27,74):
+        return "CCTG/GCTC/TCTG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
         
-    elif best_length >= 46:
-        return "GAC/CAT Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele"
+    elif best_length >= 75:
+        return "CCTG/GCTC/TCTG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Pathogenic Allele"
         
 
 

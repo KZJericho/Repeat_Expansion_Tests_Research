@@ -175,7 +175,9 @@ def all_sequences_test(Diseases, path = None, txt = None):
     for Disease in Diseases:
         Disease.group_patterns_test(path)
     for Disease in Diseases:
-        print(Disease.name, Disease.results)
+        print(Disease.name)
+        for p in Disease.results: print(Disease.results[p])
+        
     
 
 if __name__ == "__main__":
@@ -190,7 +192,11 @@ if __name__ == "__main__":
     SBMA = Disease("SBMA", "X", "AR", ["CAG"], (34,38))
     Disease_list.append(SBMA)
     
-    #SCA1
+    SCA1_uninterrupted = Disease("SCA1 Uninterrupt", "6", "ATXN1", ["CAG"], (35,39))
+    Disease_list.append(SCA1_uninterrupted)
+    
+    SCA1_interrupted = Disease("SCA1 Interrupt", "6", "ATXN1", ["CAG", "CAT"], (44,46))
+    Disease_list.append(SCA1_interrupted)
     
     SCA2 = Disease("SCA2", "12", "ATXN2", ["CAG"], (30,33))
     Disease_list.append(SCA2)
@@ -233,7 +239,11 @@ if __name__ == "__main__":
     FRA10A = Disease("FRA10A", "10", "FRA19AC1", ["CGG"], (14,200))
     Disease_list.append(FRA10A)
     
-    #FRA11B
+    FRA11A = Disease("FRA11A", "11", "FRA11A", ["CGG"], (100,101))
+    Disease_list.append(FRA11A)
+    
+    FRA11B = Disease("FRA11B", "X", "CBL2", ["CCG", "CGG"], (500,501))
+    Disease_list.append(FRA11B)
     
     FRA12A = Disease("FRA12A", "12", "DIP2B", ["CGG"], (23,270))
     Disease_list.append(FRA12A)
@@ -254,8 +264,6 @@ if __name__ == "__main__":
     
     CDM1 = Disease("CDM1", "19", "DMPK", ["CTG"],(999,1000))
     Disease_list.append(DM1)
-    
-    #SCA8
     
     SCA12 = Disease("SCA12", "5", "PPP2R2B", ["CAG"], (40,43))
     Disease_list.append(SCA12)
@@ -297,21 +305,30 @@ if __name__ == "__main__":
     SPD = Disease("SPD", "2", "HOXD13", ["GCA", "GCG", "GCT", "GCC"], (15,22))
     Disease_list.append(SPD)
     
-    #MRGH
-    
     #XLMD
     
-    #XLAG
+    XLAG = Disease("XLAG", "X", "ARX", ["GCA", "GCG", "GCT", "GCC"], (16,20))
+    Disease_list.append(XLAG)
     
-    #XLMR
+    XLMR = Disease("XLMR", "X", "SOX3", ["GCA", "GCG", "GCT", "GCC"], (11,26))
+    Disease_list.append(XLMR)
     
     #XLMRGHD
     
-    #EIEE
+    EIEE = Disease("EIEE", "X", "ARX", ["GCA", "GCG", "GCT", "GCC"], (16,27))
+    Disease_list.append(EIEE)
     
-    #DM2
+    PRTS = Disease("PRTS", "X", "ARX", ["GCA", "GCG", "GCT", "GCC"], (16,20))
+    Disease_list.append(PRTS)
     
-    #BAFME
+    DM2_uninterrupted = Disease("DM2 uninterrupted", "3", "CNBP", ["CCTG"], (30,75))
+    Disease_list.append(DM2_uninterrupted)
+    
+    DM2_interrupted = Disease("DM2 interrupted", "3", "CNBP", ["CCTG", "GCTC", "TCTG"], (26,75))
+    Disease_list.append(DM2_interrupted)
+    
+    BAFME = Disease("BAFME", "8", "SAMD12", ["TTTCA", "TTTTA"], (300,440))
+    Disease_list.append(BAFME)
     
     SCA10 = Disease("SCA10", "22", "ATXN10", ["ATTCT"], (33,850))
     Disease_list.append(SCA10)
