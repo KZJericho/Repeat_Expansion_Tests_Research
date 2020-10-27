@@ -84,7 +84,7 @@ class Disease(object):
                 pattern_hash = (base*pattern_hash + ord(pat[i]))%prime
             pats_dictionary[pat] = pattern_hash
         
-        #calculate first hash and pattern hash    
+        #calculate first hash   
         for i in range(pattern_length):
             current_txt_hash = my_mod((base*current_txt_hash + ord(txt[i])),prime)
 

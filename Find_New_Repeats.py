@@ -20,15 +20,42 @@ class short_tandem_repeat(object):
         self.pattern = pattern
 
 # Consider how to handle case where we have a large STR
-#
+# Instead of dealing with patterns within patterns, we will print it all out
 # 
         
 # Go through a text document and search for STRs with pattern unit length n
-def patterns_search(text, n):
+def patterns_search(text, pattern_length):
+    def my_mod(dividend, divisor):
+        mod = dividend%divisor
+        if mod < 0:
+            return mod + divisor
+        else:
+            return mod
+    # Define variables for hashing
+    text_length = len(text)
+    
+    prev_hash = 0
+    curr_hash = 0
+    
+    prime = 2971215073
+    base = 256
+    exponent = 1
+    i = 0
+    
+    #calculate exponent 
+    for i in range(pattern_length - 1):
+        exponent = (base**(pattern_length-1))%prime
+    
     # Find our prev text chunk by sampling the first n characters.
-    # Hash prev text chunk
     # Look at curr text chunk n characters away (123) then (456)
+    prev_text = text[0:pattern_length]
+    curr_text = txt[pattern_length:2*pattern_length] 
+    
+    # Hash prev text chunk
     # Hash the curr text chunk
+    for i in range(pattern_length):
+        prev_hash = (base*prev_hash + ord(pat[i]))%prime
+        curr_hash = (base*curr_hash + ord(pat[i]))%prime
     
     # "shift" is the number of characters shifted from alignment mod n
     for shift in range(n):
@@ -46,6 +73,9 @@ def patterns_search(text, n):
 
 # We're given a text, and we want to record all of the patterns of a given
 # length n.
+
+
+#---#
 def patterns_search(text, n):
     # "GCA" "Index 3" "5"
     # pat -> {(location, length)} TUPLE
