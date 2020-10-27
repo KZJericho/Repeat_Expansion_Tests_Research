@@ -57,24 +57,36 @@ def patterns_search(text, pattern_length):
         prev_hash = (base*prev_hash + ord(pat[i]))%prime
         curr_hash = (base*curr_hash + ord(pat[i]))%prime
     
-    # "shift" is the number of characters shifted from alignment mod n
-    for shift in range(n):
-        for i in range(shift, len(text), n):
-            curr_chunk = text[i:i+n]
-            # rehash the curr_chunk
-            # compare chunk hash to prev chunk hash
-            # if equal, increment pattern length
+    # "shift" is the number of characters shifted from alignment mod pattern_length
+    #do i need a while statement here?
+    for shift in range(pattern_length):
+        for i in range(shift, len(text), pattern_length): # <-- should pattern length be -1?
+            
+            #compare first two chunks
+            if prev_text == curr_text and prev_hash == curr_hash:
+                #record the pattern name (prev_text or curr_text) into class
+                #+1 to the first term in tuple associated to dict key (length)
+                #record index of prev_text as second term in tuple associated to dict key (location)
+                prev_text = curr_text
+                curr_text = #next text chunk
+                
+                #rehash curr_hash (PROBABLY INCORRECT RN)
+                for i in range(pattern_length):
+                    curr_hash = my_mod((base*(curr_hash-ord(txt[i])*exponent) + ord(txt[i+pattern_length])),prime)
             pass
-    # Compare the prev text chunk and curr text chunk
-        # If they are equal, record length +1
-    # In any case, curr text chunk becomes prev text chunk
-    # 
-    
+    #Compare one last time
+    if prev_text == curr_text and prev_hash == curr_hash:
+        #record the pattern name (prev_text or curr_text) into class
+        #+1 to the first term in tuple associated to dict key (length)
+        #record index of prev_text as second term in tuple associated to dict key (location)
 
-# We're given a text, and we want to record all of the patterns of a given
-# length n.
+    #in case of negative hash value
+        if curr_hash < 0:
+            curr_hash = curr_hash + prime
+        else: 
+            curr_hash = curr_hash
 
-
+'''
 #---#
 def patterns_search(text, n):
     # "GCA" "Index 3" "5"
@@ -131,7 +143,7 @@ def patterns_search(text, n):
                     if prev_text == curr_text and prev_hash == curr_hash:
                         length += 1
                         
-
+'''
 '''
 Hash value of [i,i+x] = a
 Hash value of [i+x+1,i+2x] = b
