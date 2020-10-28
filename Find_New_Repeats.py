@@ -44,8 +44,7 @@ def find_new_patterns(text, n):
 def hash():
     pass
     # TODO: WRITE ME!
-    # Hint: What arguments should you pass to this function?
-    # Final note - it might be possible that, based on how we're doing this
+    # Hint: What arguments should you pass to this function? How do you translate the loose hashing code into one routine?
 
 
 #========================================#
