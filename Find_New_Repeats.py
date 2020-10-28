@@ -1,37 +1,61 @@
-def my_mod(dividend, divisor):
+#========================================#
+#               STR Class                #
+#========================================#
+# STR: A short tandem repeat object  
+class STR(object):
+    def __init__(self, length, location, pattern, path = None):
+        # Allows us to associate a result with a particular file
+        self.path = path
+        
+        # Length of pattern in terms of repeats
+        self.length = length
+        
+        # The start index of the pattern in the given path
+        self.location = location
+        
+        # The stored pattern
+        self.pattern = pattern
+
+#========================================#
+#                   Mod                  #
+#========================================#
+# Computes modulo
+def mod(dividend, divisor):
     mod = dividend%divisor
     if mod < 0:
         return mod + divisor
     else:
         return mod
     
+#========================================#
+#            Find New Patterns           #
+#========================================#
+# Find all patterns in the provided text with pattern unit length n
 def find_new_patterns(text, n):
     pass
     # while length < n+1
     # loop through and run patterns_search for each pattern length
     # return sets 
 
-    
-class short_tandem_repeat(object):
-    def __init__(self, length, location, pattern, path = None):
-        self.path = path
-        self.length = length
-        self.location = location
-        self.pattern = pattern
+#========================================#
+#                  Hash                  #
+#========================================#
+# Computes the hash value of a given string
+def hash():
+    pass
+    # TODO: WRITE ME!
+    # Hint: What arguments should you pass to this function?
+    # Final note - it might be possible that, based on how we're doing this
 
-# Consider how to handle case where we have a large STR
-# Instead of dealing with patterns within patterns, we will print it all out
-# 
-        
+
+#========================================#
+#             Pattern Search             #
+#========================================#
 # Go through a text document and search for STRs with pattern unit length n
 def patterns_search(text, pattern_length):
-    def my_mod(dividend, divisor):
-        mod = dividend%divisor
-        if mod < 0:
-            return mod + divisor
-        else:
-            return mod
+        
     # Define variables for hashing
+    # These should be lumped into the hash we use/ passed as parameters into the hash
     text_length = len(text)
     
     prev_hash = 0
@@ -42,14 +66,10 @@ def patterns_search(text, pattern_length):
     exponent = 1
     i = 0
     
-    #calculate exponent 
+    # Calculate exponent - are you sure this is being done properly? 
+    # Currently this recomputes the same thing each loop
     for i in range(pattern_length - 1):
         exponent = (base**(pattern_length-1))%prime
-    
-    # Find our prev text chunk by sampling the first n characters.
-    # Look at curr text chunk n characters away (123) then (456)
-    prev_text = text[0:pattern_length]
-    curr_text = txt[pattern_length:2*pattern_length] 
     
     # Hash prev text chunk
     # Hash the curr text chunk
@@ -60,20 +80,30 @@ def patterns_search(text, pattern_length):
     # "shift" is the number of characters shifted from alignment mod pattern_length
     #do i need a while statement here?
     for shift in range(pattern_length):
-        for i in range(shift, len(text), pattern_length): # <-- should pattern length be -1?
+        # The inner loop is going to do the search work - we should use the outer loop to set up for the inner loop,
+        # like finding the initial curr chunk.
+        
+        # An expression to help: i = shift + L * pattern_length, where L is the number of loops run thus far starting from 0
+        for i in range(shift + pattern_length, len(text), pattern_length): # <-- should pattern length be -1? Nope!
+            prev_text = curr_text;
+            curr_text = # WRITE ME!
             
-            #compare first two chunks
-            if prev_text == curr_text and prev_hash == curr_hash:
-                #record the pattern name (prev_text or curr_text) into class
-                #+1 to the first term in tuple associated to dict key (length)
-                #record index of prev_text as second term in tuple associated to dict key (location)
+            if prev_hash == curr_hash and prev_text == curr_text :
+                # We need an STR object to track the information in if one doesn't exist yet.
+                
                 prev_text = curr_text
                 curr_text = #next text chunk
                 
                 #rehash curr_hash (PROBABLY INCORRECT RN)
                 for i in range(pattern_length):
-                    curr_hash = my_mod((base*(curr_hash-ord(txt[i])*exponent) + ord(txt[i+pattern_length])),prime)
-            pass
+                    curr_hash = mmod((base*(curr_hash-ord(txt[i])*exponent) + ord(txt[i+pattern_length])),prime)
+            else:
+                pass 
+                # What do we need to do if we FAIL to match?
+                # A few ideas... 
+                # Well, if we have an STR, we need to store it somewhere, as we're going to likely make many.
+                # We also need to indicate that whatever STR we WERE modifying is no longer relevant
+                
     #Compare one last time
     if prev_text == curr_text and prev_hash == curr_hash:
         #record the pattern name (prev_text or curr_text) into class
