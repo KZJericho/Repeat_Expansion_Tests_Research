@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 '''
 Preliminary to the following - I may need to consider it a bit more, but I'm not entirely sure we can fully take advantage of Karp-Rabin in this version of the code. I will explain this tomorrow as I'm not entirely sure at the moment.
 
@@ -21,6 +22,8 @@ Added comments on the following lines:
 - 64: A note about how to interpret i's value
 - Added a lot of hints and other notes in the "patterns_search" code - I recommend you read over these
 '''
+=======
+>>>>>>> ac7ad0bfc468bbd8a81ffae3c725f5ef84b77c7e
 #========================================#
 #               STR Class                #
 #========================================#
@@ -64,6 +67,7 @@ def find_new_patterns(text, n):
 #                  Hash                  #
 #========================================#
 # Computes the hash value of a given string
+<<<<<<< HEAD
 def hash(text):
     prime = 2971215073
     base = 256
@@ -78,6 +82,14 @@ def hash(text):
         result = (base*result + ord(pat[i]))%prime #<-- it shouldnt be pat[i] but idk what to change pat to
     
     return result
+=======
+def hash():
+    pass
+    # TODO: WRITE ME!
+    # Hint: What arguments should you pass to this function? How do you translate the loose hashing code into one routine?
+
+
+>>>>>>> ac7ad0bfc468bbd8a81ffae3c725f5ef84b77c7e
 #========================================#
 #             Pattern Search             #
 #========================================#
@@ -91,6 +103,19 @@ def patterns_search(text, pattern_length):
     prev_hash = 0
     curr_hash = 0
     
+<<<<<<< HEAD
+=======
+    prime = 2971215073
+    base = 256
+    exponent = 1
+    i = 0
+    
+    # Calculate exponent - are you sure this is being done properly? 
+    # Currently this recomputes the same thing each loop
+    for i in range(pattern_length - 1):
+        exponent = (base**(pattern_length-1))%prime
+    
+>>>>>>> ac7ad0bfc468bbd8a81ffae3c725f5ef84b77c7e
     # Hash prev text chunk
     # Hash the curr text chunk
     for i in range(pattern_length):
@@ -104,7 +129,11 @@ def patterns_search(text, pattern_length):
         # like finding the initial curr chunk.
         
         # An expression to help: i = shift + L * pattern_length, where L is the number of loops run thus far starting from 0
+<<<<<<< HEAD
         for i in range(shift + pattern_length, len(text), pattern_length): 
+=======
+        for i in range(shift + pattern_length, len(text), pattern_length): # <-- should pattern length be -1? Nope!
+>>>>>>> ac7ad0bfc468bbd8a81ffae3c725f5ef84b77c7e
             prev_text = curr_text;
             curr_text = # WRITE ME!
             
