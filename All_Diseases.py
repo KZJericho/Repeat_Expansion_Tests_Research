@@ -353,21 +353,3 @@ if __name__ == "__main__":
     
     all_sequences_test(Disease_list, "C:\\Users\\KZJer\\Documents\\Repeat_Expansion_Tests_Research\\Genomes\\DRPLA_NEG_D63808.1.txt")
     
-'''        
-    #determine diseaase positive/negative    
-    if best_length < 1:
-        return None
-    elif best_length <= 44:
-        return "CGG Repeat Length:", best_length, "Location: Index", current_best_location, "Negative Result: Normal Allele"
-        
-    elif best_length in range (28, 34):
-        return "CGG Repeat Length:", best_length, "Location: Index", current_best_location, "Unmutable Normal Result"
-        
-    elif best_length in range (34, 37):
-        return "CGG Repeat Length:", best_length, "Location: Index", current_best_location, "Positive Result: Reduced Penetrance"
-        
-    elif best_length > 36:
-        return "CGG Repeat Length:", best_length, "Location: Index", current_best_location, 
-        "Positive Result: Full Penetrance
-        
-'''

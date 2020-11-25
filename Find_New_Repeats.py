@@ -1,3 +1,5 @@
+import json
+
 #========================================#
 #               STR Class                #
 #========================================#
@@ -14,10 +16,13 @@ class STR(object):
         self.location = location
         
     def __repr__(self):
-        pat = "Pat: " + str(self.pattern) +"\n"
+        pat = "\nPat: " + str(self.pattern) +"\n"
         leng = "Len: " + str(self.length) + "\n"
         loc = "Loc: " + str(self.location) + "\n"
         return pat + leng + loc
+    
+    def STR_to_tup(self):
+        return (self.pattern, self.length, self.location)
     
 
 #========================================#
@@ -34,17 +39,37 @@ def mod(dividend, divisor):
 #========================================#
 #            Find New Patterns           #
 #========================================#
-def print_results(Dict):
-    for key in Dict:
-        print(Dict[key])
 
 # Find all patterns in the provided text with pattern unit length n
-def find_new_patterns(text, n):
-    STR_dict = {}
-    for length in range(3, n+1):
-        STR_dict[length] = patterns_search(text, length)
+# inpath is the file name containing the genome sequence
+# outpath is the file name where results will be recorded
+def find_new_patterns(inpath, n):
+    msg = """Choose Sort Method: \n 
+        1) Pattern Length\n
+        2) Repeat Length\n
+        3) Location\n Input Here: """
         
-    return STR_dict 
+    text = scrub(read_file(inpath))
+    outpath = make_outname(inpath, "_RESULT")
+        
+    index = int(input(msg))
+    if (index == 1):
+        key_getter = lambda str_obj : len(str_obj.pattern)
+    elif (index == 2):
+        key_getter = lambda str_obj : str_obj.length
+    elif (index == 3):
+        key_getter = lambda str_obj : str_obj.location
+        
+    STR_list = []
+    for length in range(3, n+1):
+        STR_list.extend(patterns_search(text, length))
+    
+    sort_result(STR_list, key_getter)
+        
+    all_serialized = serialize_results(STR_list)
+    
+    result_list_to_json(outpath, all_serialized)
+    return STR_list
 
 #========================================#
 #                  Hash                  #
@@ -94,13 +119,61 @@ def patterns_search(text, pattern_length):
                     STRs.append(STR(prev_text, length, start))
                 length = 1
                 start = i
-                
+    
     return STRs
 
+#========================================#
+#             File Reading               #
+#========================================#
+def read_file(path):
+    with open(path, "rt") as f:
+        return f.read()
+
+    
+def write_file(path, contents):
+    with open(path, "wt") as f:
+        f.write(contents)
+
+
+def result_list_to_json(path, results):
+    js = json.dumps(results)
+    print(js)
+    write_file(path, js)
+    
+
+def result_list_from_json(path):
+    js = read_file(path)
+    results = json.loads(js)
+
+    # Copy previous results into the curent disease object
+    for result in results:
+        results[result] = results[result]
+
+def sort_result(result_list, key_getter):
+    result_list.sort(key = key_getter)
+    return result_list
+
+
+def serialize_results(results_unserialized):
+    result = []
+    for result_unserialized in results_unserialized:
+        result.append(result_unserialized.STR_to_tup())
+    return result
+
+# .txt
+def make_outname(inpath, tag):
+    n = len(inpath) - 1
+    while (inpath[n] != '.'):
+        n -= 1
+    file_ext = inpath[n:]
+    name = inpath[:n]
+    return name + tag + file_ext
+    
+def scrub(text):
+    return "".join(text.strip().splitlines())
+        
+    
 if __name__ == "__main__":
-    result_dict = find_new_patterns("CAGCAGCAGCAGCCGCCGATTACGAACGATCGTACGATTC", 4)
-    print_results(result_dict)
-
-        
-        
-
+    result_list = find_new_patterns("C:\\Users\\KZJer\\Documents\\Repeat_Expansion_Tests_Research\\Testing Results\\New Repeats\\KM610327.1.txt", 10)
+    print(result_list)
+    #result_to_json("C:\Users\KZJer\Documents\Repeat_Expansion_Tests_Research\Testing Results\New Repeats", result_dict)
